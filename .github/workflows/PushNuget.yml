@@ -23,9 +23,12 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}        
           
-      - name: Build solution and generate NuGet package
+      - name: Build solution
         run: 
           dotnet build --no-restore
+          
+      - name: Generate NuGet package
+        run: 
           dotnet pack -c Release -o out  
 
       - name: Push generated package to GitHub registry
