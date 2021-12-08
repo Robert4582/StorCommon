@@ -24,7 +24,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}        
           
       - name: Build solution and generate NuGet package
-        run:
+        run: 
           dotnet build --no-restore
           dotnet pack -c Release -o out  
 
