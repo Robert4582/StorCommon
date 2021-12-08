@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\Common\\Common.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.0-test",
       "restore": {
         "projectUniqueName": "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\Common\\Common.csproj",
         "projectName": "StorCommon",
