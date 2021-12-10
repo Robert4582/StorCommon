@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  setup_rmq:
+  setup_rmq_build_test:
   
     runs-on: ubuntu-latest
     
@@ -16,27 +16,18 @@ jobs:
       with:
         RABBITMQ_PORT: 5672
         RABBITMQ_MNG_PORT: 15672
-        RABBITMQ_TAG: '3-management-alpine'
-        
-  build:
 
-    runs-on: ubuntu-latest
-
-    steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-  test:
       
-    runs-on: ubuntu-latest
-    
-    steps:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
