@@ -14,8 +14,6 @@ jobs:
     steps:
     - uses: mer-team/rabbitmq-mng-action@v1.2
       with:
-        RABBITMQ_USER: 'username'
-        RABBITMQ_PASS: 'password'
         RABBITMQ_PORT: 5672
         RABBITMQ_MNG_PORT: 15672
         RABBITMQ_TAG: '3-management-alpine'
