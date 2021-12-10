@@ -14,8 +14,8 @@ namespace CommonTests.IntegrationTests
         public void Setup()
         {
             //Arrange
-            Q1 = new MessageQueue("host.docker.internal");
-            Q2 = new MessageQueue("host.docker.internal");
+            Q1 = new MessageQueue("host.docker.internal:5672");
+            Q2 = new MessageQueue("host.docker.internal:5672");
 
         }
         [TearDown]
