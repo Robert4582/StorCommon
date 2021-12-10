@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a3d20009-1cc0-4401-8b7e-322c6f08b611": {
+      "ProjectGuid": "a3d20009-1cc0-4401-8b7e-322c6f08b611",
+      "DisplayName": "CommonTests",
+      "ColorIndex": 0
+    },
+    "dd5cce40-5980-4668-9c60-242d286fc29d": {
+      "ProjectGuid": "dd5cce40-5980-4668-9c60-242d286fc29d",
+      "DisplayName": "Common",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

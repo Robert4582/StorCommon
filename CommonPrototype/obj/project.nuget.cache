@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "I2Wgv/7z6u8ja8HH3noFsIqais5tEz/xxh+aXuBJVneNXCcg0Dpfgwj9QvJeHDnivOYmtLoJhp4jlZZ6+OQrNg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\CommonPrototype\\CommonPrototype.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kasp494b\\.nuget\\packages\\rabbitmq.client\\6.2.2\\rabbitmq.client.6.2.2.nupkg.sha512",
+    "C:\\Users\\kasp494b\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\kasp494b\\.nuget\\packages\\system.threading.channels\\4.7.1\\system.threading.channels.4.7.1.nupkg.sha512",
+    "C:\\Users\\kasp494b\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

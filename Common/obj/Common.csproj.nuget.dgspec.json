@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\Common\\Common.csproj": {
-      "version": "1.0.0-test",
+      "version": "1.0.1",
       "restore": {
         "projectUniqueName": "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\Common\\Common.csproj",
         "projectName": "StorCommon",
@@ -45,6 +45,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
