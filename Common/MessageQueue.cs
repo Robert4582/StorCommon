@@ -14,7 +14,8 @@ namespace Common
         protected ConnectionFactory factory;
         protected IConnection connection;
         protected IModel channel;
-        protected QueueInteraction queueInteraction;
+
+        public QueueInteraction queueInteraction;
 
         public MultiRelationDictionary<string, Services> ServiceExchangeBindings { get; protected set; }
 

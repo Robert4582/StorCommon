@@ -14,8 +14,8 @@ namespace CommonTests.IntegrationTests
         public void Setup()
         {
             //Arrange
-            Q1 = new MessageQueue("host.docker.internal:5672");
-            Q2 = new MessageQueue("host.docker.internal:5672");
+            Q1 = new MessageQueue("host.docker.internal");
+            Q2 = new MessageQueue("host.docker.internal");
 
         }
         [TearDown]
@@ -57,6 +57,7 @@ namespace CommonTests.IntegrationTests
         public void DoesNotInterceptOwnMessage()
         {
             //Arrange
+            Q1.queueInteraction = QueueInteraction.Broadcaster;
             var file = new NetworkFile() { Service = Services.GlobalMessage };
             bool HasSelfRecieved = false;
 
