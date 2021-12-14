@@ -26,5 +26,9 @@ namespace Common
         {
             return (T)JsonSerializer.Deserialize(objBytes, typeof(T));
         }
+        public static T DeserializeFromMemory<T>(ReadOnlyMemory<byte> objBytes)
+        {
+            return (T)JsonSerializer.Deserialize(objBytes.Span, typeof(T));
+        }
     }
 }

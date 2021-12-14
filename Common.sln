@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonTests", "CommonTests\CommonTests\CommonTests.csproj", "{A3D20009-1CC0-4401-8B7E-322C6F08B611}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonPrototype", "CommonPrototype\CommonPrototype.csproj", "{0A109751-CF1D-430C-BDA4-7F2C8C0A4337}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonPrototype", "CommonPrototype\CommonPrototype.csproj", "{0A109751-CF1D-430C-BDA4-7F2C8C0A4337}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

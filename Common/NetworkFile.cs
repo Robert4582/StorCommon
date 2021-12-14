@@ -6,7 +6,7 @@
         public int Timeout { get; set; }
 
     }
-    public class NetworkFile<T> : NetworkFile where T : struct
+    public class NetworkFile<T> : NetworkFile
     {
         T Info { get; set; }
 
