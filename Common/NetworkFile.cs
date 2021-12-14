@@ -8,7 +8,7 @@
     }
     public class NetworkFile<T> : NetworkFile
     {
-        T Info { get; set; }
+        public T Info { get; set; }
 
     }
 }
