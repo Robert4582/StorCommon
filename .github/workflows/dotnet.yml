@@ -33,7 +33,7 @@ jobs:
 
     - name: Generate NuGet package
       run: 
-        dotnet pack "Common.csproj" -o NugetPackages
+        dotnet pack -o NugetPackages
     - name: Push generated package to GitHub registry
       run:
         dotnet nuget push "**/*.nupkg" -k ${{secrets.NUGET_KEY}} -s https://api.nuget.org/v3/index.json
