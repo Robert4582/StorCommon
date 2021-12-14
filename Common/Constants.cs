@@ -11,14 +11,4 @@ namespace Common
     {
         public static string Hostname { get; } = "localhost";
     }
-    public static class Extensions
-    {
-        public static string ToLower<T>(this T source) where T : IConvertible//enum
-        {
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type");
-
-            return source.ToString().ToLower();
-        }
-    }
 }

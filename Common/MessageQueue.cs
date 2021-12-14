@@ -1,11 +1,7 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common.Extensions;
 
 namespace Common
 {
@@ -13,7 +9,7 @@ namespace Common
     {
         protected ConnectionFactory factory;
         protected IConnection connection;
-        protected IModel channel;
+        public IModel channel;
 
         public QueueInteraction queueInteraction;
 
@@ -21,10 +17,10 @@ namespace Common
 
         public EventingBasicConsumer consumer;
 
-        public MessageQueue(string hostname = null, QueueInteraction interaction = QueueInteraction.Bidirectional)
+        public MessageQueue(string hostname = null, int port = 5672, QueueInteraction interaction = QueueInteraction.Bidirectional)
         {
             hostname = hostname == null ? Constants.Hostname : hostname;
-            factory = new ConnectionFactory() { HostName = hostname };
+            factory = new ConnectionFactory() { HostName = hostname, Port = port };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
             consumer = new EventingBasicConsumer(channel);
@@ -36,6 +32,10 @@ namespace Common
         bool ShouldHaveReceive
         {
             get { return queueInteraction != QueueInteraction.Broadcaster; }
+        }
+        bool ShouldHaveSend
+        {
+            get { return queueInteraction != QueueInteraction.Listener; }
         }
 
         public virtual void CreateExchange(RabbitMQExchangeTypes exchangeType, string exchangeName)
@@ -74,9 +74,9 @@ namespace Common
             }
         }
 
-        public virtual void Send(NetworkFile data)
+        public virtual void Send<T>(T data) where T : NetworkFile
         {
-            if (queueInteraction != QueueInteraction.Listener)
+            if (ShouldHaveSend)
             {
                 var messageBytes = Json.SerializeToBytes(data);
                 foreach (var exchangeName in ServiceExchangeBindings[data.Service])
@@ -93,29 +93,28 @@ namespace Common
             }
             
         }
-
-        public void AssignOnRecieve(Action methodToCall)
+        public virtual void Send<T>(T data, IBasicProperties props) where T : NetworkFile
         {
-            if (ShouldHaveReceive)
+            if (ShouldHaveSend)
             {
-                consumer.Received += (model, ea) => methodToCall();
+                var messageBytes = Json.SerializeToBytes(data);
+                foreach (var exchangeName in ServiceExchangeBindings[data.Service])
+                {
+                    channel.BasicPublish(
+                        exchange: exchangeName,
+                        routingKey: data.Service.ToString(),
+                        body: messageBytes);
+                }
             }
             else
             {
-                throw new Exception("Queue is broadcaster and should not listen.");
+                throw new Exception("Queue is listener and should not broadcast.");
             }
+
         }
-
-        public void AssignOnRecieve(Action<BasicDeliverEventArgs> methodToCall)
+        public void UnassignOnRecieve(Action<object, BasicDeliverEventArgs> method)
         {
-            if (ShouldHaveReceive)
-            {
-                consumer.Received += (model, ea) => methodToCall(ea);
-            }
-            else
-            {
-                throw new Exception("Queue is broadcaster and should not listen.");
-            }
+            consumer.Received -= (model, ea) => method(model, ea);
         }
 
         public void AssignOnRecieve(Action<object, BasicDeliverEventArgs> methodToCall)
@@ -128,6 +127,16 @@ namespace Common
             {
                 throw new Exception("Queue is broadcaster and should not listen.");
             }
+        }
+
+        public void AssignOnRecieve(Action<BasicDeliverEventArgs> methodToCall)
+        {
+            AssignOnRecieve((model, ea) => methodToCall(ea));
+        }
+
+        public void AssignOnRecieve(Action methodToCall)
+        {
+            AssignOnRecieve((model, ea) => methodToCall());
         }
 
         public void Dispose()

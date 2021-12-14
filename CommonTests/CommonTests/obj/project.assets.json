@@ -914,7 +914,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "StorCommon/1.0.2": {
+      "StorCommon/1.1.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -3920,7 +3920,7 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "StorCommon/1.0.2": {
+    "StorCommon/1.1.0": {
       "type": "project",
       "path": "../../Common/Common.csproj",
       "msbuildProject": "../../Common/Common.csproj"
@@ -3931,7 +3931,7 @@
       "Microsoft.NET.Test.Sdk >= 16.11.0",
       "NUnit >= 3.13.2",
       "NUnit3TestAdapter >= 4.0.0",
-      "StorCommon >= 1.0.2",
+      "StorCommon >= 1.1.0",
       "coverlet.collector >= 3.1.0"
     ]
   },

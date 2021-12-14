@@ -33,7 +33,7 @@
           "lib/netcoreapp3.0/System.Threading.Channels.dll": {}
         }
       },
-      "StorCommon/1.0.2": {
+      "StorCommon/1.1.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -115,7 +115,7 @@
         "version.txt"
       ]
     },
-    "StorCommon/1.0.2": {
+    "StorCommon/1.1.0": {
       "type": "project",
       "path": "../Common/Common.csproj",
       "msbuildProject": "../Common/Common.csproj"
@@ -123,7 +123,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "StorCommon >= 1.0.2"
+      "StorCommon >= 1.1.0"
     ]
   },
   "packageFolders": {
