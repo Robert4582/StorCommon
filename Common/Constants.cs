@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Common
 {
-    public enum Services { PrivateMessage, GroupMessage, GlobalMessage, Exception, Login, Create, Patch, SessionHost, SessionManager }
+    public enum Services { PrivateMessage, GroupMessage, GlobalMessage, DB, Exception, Login, Create, Patch, SessionHost, SessionManage, Response }
     public enum RabbitMQExchangeTypes { Direct, Fanout, Headers, Topic }
 
     public enum QueueInteraction { Listener, Broadcaster, Bidirectional }

@@ -35,7 +35,7 @@ namespace Common.Extensions
             props.CorrelationId = correlationId;
             fileToSend.CorrelationID = correlationId;
 
-            queue.channel.BasicConsume(
+            string queueName = queue.channel.BasicConsume(
                 consumer: queue.consumer,
                 queue: props.ReplyTo,
                 autoAck: true);
@@ -53,7 +53,10 @@ namespace Common.Extensions
                 }
             }
 
-            queue.AssignOnRecieve((x, y) => AddToQueue(x, y, correlationId, respQueue));
+            queue.AssignOnRecieve((x, y) => {
+                AddToQueue(x, y, correlationId, respQueue);
+                queue.channel.BasicCancel(queueName);
+            });
 
             queue.Send(fileToSend, props);
             return respQueue.Take();

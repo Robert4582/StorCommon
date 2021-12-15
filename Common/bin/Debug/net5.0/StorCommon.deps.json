@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "StorCommon/1.0.3": {
+      "StorCommon/1.1.0": {
         "dependencies": {
           "RabbitMQ.Client": "6.2.2"
         },
@@ -31,7 +31,7 @@
     }
   },
   "libraries": {
-    "StorCommon/1.0.3": {
+    "StorCommon/1.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
