@@ -3,6 +3,7 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,10 +14,12 @@ namespace Common.Extensions
 {
     public static class EnumExtensions
     {
-        public static string ToLower<T>(this T source) where T : IConvertible//enum
+        public static T[] All<T>(this T value) where T : Enum
         {
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type");
+            return (T[])Enum.GetValues(value.GetType());
+        }
+        public static string ToLower<T>(this T source) where T : Enum//enum
+        {
 
             return source.ToString().ToLower();
         }

@@ -73,6 +73,10 @@ namespace Common
                                      consumer: consumer);
             }
         }
+        public virtual void Send(NetworkFile<string[]> data)
+        {
+            Send<NetworkFile<string[]>>(data);
+        }
 
         public virtual void Send<T>(T data) where T : NetworkFile
         {
@@ -91,7 +95,11 @@ namespace Common
             {
                 throw new Exception("Queue is listener and should not broadcast.");
             }
-            
+
+        }
+        public virtual void Send(NetworkFile<string[]> data, IBasicProperties props)
+        {
+            Send<NetworkFile<string[]>>(data, props);
         }
         public virtual void Send<T>(T data, IBasicProperties props) where T : NetworkFile
         {

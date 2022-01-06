@@ -9,6 +9,14 @@
     }
     public class NetworkFile<T> : NetworkFile
     {
+        public NetworkFile()
+        {
+        }
+        public NetworkFile(T info)
+        {
+            Info = info;
+        }
+
         public T Info { get; set; }
 
     }

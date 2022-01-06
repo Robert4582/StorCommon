@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
+using Common.Extensions;
 
 namespace Common
 {
@@ -9,6 +11,7 @@ namespace Common
     public enum QueueInteraction { Listener, Broadcaster, Bidirectional }
     public static class Constants
     {
+        public static Services[] AllServices = Services.DB.All();
         public static string Hostname { get; } = "localhost";
     }
 }
