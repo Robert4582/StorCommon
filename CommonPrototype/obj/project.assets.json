@@ -33,7 +33,7 @@
           "lib/netcoreapp3.0/System.Threading.Channels.dll": {}
         }
       },
-      "StorCommon/1.1.1": {
+      "StorCommon/1.1.2": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -115,7 +115,7 @@
         "version.txt"
       ]
     },
-    "StorCommon/1.1.1": {
+    "StorCommon/1.1.2": {
       "type": "project",
       "path": "../Common/Common.csproj",
       "msbuildProject": "../Common/Common.csproj"
@@ -123,7 +123,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "StorCommon >= 1.1.1"
+      "StorCommon >= 1.1.2"
     ]
   },
   "packageFolders": {
@@ -189,7 +189,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.12, 5.0.12]"
+            "version": "[5.0.13, 5.0.13]"
           }
         ],
         "frameworkReferences": {
@@ -197,7 +197,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -82,12 +82,12 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
     "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\Common\\Common.csproj": {
-      "version": "1.1.1",
+      "version": "1.1.2",
       "restore": {
         "projectUniqueName": "C:\\Users\\kasp494b\\Desktop\\Store Systemer\\StorCommon\\Common\\Common.csproj",
         "projectName": "StorCommon",
@@ -148,7 +148,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

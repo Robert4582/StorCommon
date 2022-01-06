@@ -15,7 +15,12 @@
       "ProjectGuid": "0a109751-cf1d-430c-bda4-7f2c8c0a4337",
       "DisplayName": "CommonPrototype",
       "ColorIndex": 2
+    },
+    "69607c6e-170d-4306-8fef-7d17a09c2d57": {
+      "ProjectGuid": "69607c6e-170d-4306-8fef-7d17a09c2d57",
+      "DisplayName": "Extra",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }

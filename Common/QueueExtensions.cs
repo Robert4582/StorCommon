@@ -42,13 +42,11 @@ namespace Common.Extensions
 
             static void AddToQueue(object model, BasicDeliverEventArgs ea, string correlationId, BlockingCollection<Y> respQueue)
             {
-                Console.WriteLine("Have received");
                 var body = ea.Body.ToArray();
                 var response = Json.DeserializeFromBytes<Y>(body);
                 
                 if (response.CorrelationID == correlationId)
                 {
-                    Console.WriteLine("Have received correct");
                     respQueue.Add(response);
                 }
             }
