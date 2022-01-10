@@ -26,7 +26,7 @@ namespace Common.Extensions
     }
     public static class QueueExtensions
     {
-        public static Y SendAsRpc<Y,T>(this MessageQueue queue, T fileToSend) where T : NetworkFile where Y: NetworkFile
+        public static Y SendAsRpc<Y,T>(this MessageQueue queue, T fileToSend, bool useStandard = false) where T : NetworkFile where Y: NetworkFile
         {
             BlockingCollection<Y> respQueue = new BlockingCollection<Y>();
 
@@ -59,19 +59,19 @@ namespace Common.Extensions
                 queue.channel.BasicCancel(queueName);
             });
 
-            queue.Send(fileToSend, props);
+            queue.Send(fileToSend, props, useStandard);
             return respQueue.Take();
         }
 
 
-        public static void RespondToRpc<T, Y>(this MessageQueue queue, T fileReceived, Y fileToSend) where T : NetworkFile where Y : NetworkFile
+        public static void RespondToRpc<T, Y>(this MessageQueue queue, T fileReceived, Y fileToSend, bool useStandard = false) where T : NetworkFile where Y : NetworkFile
         {
             IBasicProperties props = queue.channel.CreateBasicProperties();
 
             props.CorrelationId = fileReceived.CorrelationID;
             fileToSend.CorrelationID = fileReceived.CorrelationID;
 
-            queue.Send(fileToSend, props);
+            queue.Send(fileToSend, props, useStandard);
         }
     }
 }
