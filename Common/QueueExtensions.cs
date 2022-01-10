@@ -26,6 +26,8 @@ namespace Common.Extensions
     }
     public static class QueueExtensions
     {
+        private static bool Unassign = false;
+
         public static Y SendAsRpc<Y,T>(this MessageQueue queue, T fileToSend, bool useStandard = false) where T : NetworkFile where Y: NetworkFile
         {
             BlockingCollection<Y> respQueue = new BlockingCollection<Y>();
@@ -53,14 +55,16 @@ namespace Common.Extensions
                     respQueue.Add(response);
                 }
             }
-
-            queue.AssignOnRecieve((x, y) => {
-                AddToQueue(x, y, correlationId, respQueue);
-                queue.channel.BasicCancel(queueName);
-            });
+            Action<object, BasicDeliverEventArgs> x = (x, y) => AddToQueue(x, y, correlationId, respQueue);
+            queue.AssignOnRecieve(x);
 
             queue.Send(fileToSend, props, useStandard);
-            return respQueue.Take();
+            var response = respQueue.Take();
+            if (Unassign)
+            {
+                queue.UnassignOnRecieve(x);
+            }
+            return response;
         }
 
 
