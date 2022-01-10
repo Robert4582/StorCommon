@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "CommonPrototype/1.0.0": {
         "dependencies": {
-          "StorCommon": "1.0.3"
+          "StorCommon": "1.1.3"
         },
         "runtime": {
           "CommonPrototype.dll": {}
@@ -28,7 +28,7 @@
       },
       "System.Memory/4.5.4": {},
       "System.Threading.Channels/4.7.1": {},
-      "StorCommon/1.0.3": {
+      "StorCommon/1.1.3": {
         "dependencies": {
           "RabbitMQ.Client": "6.2.2"
         },
@@ -65,7 +65,7 @@
       "path": "system.threading.channels/4.7.1",
       "hashPath": "system.threading.channels.4.7.1.nupkg.sha512"
     },
-    "StorCommon/1.0.3": {
+    "StorCommon/1.1.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

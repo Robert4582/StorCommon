@@ -13,11 +13,12 @@ namespace Common
 
         public QueueInteraction queueInteraction;
 
+        public string standardExchange;
         public MultiRelationDictionary<string, Services> ServiceExchangeBindings { get; protected set; }
 
         public EventingBasicConsumer consumer;
 
-        public MessageQueue(string hostname = null, int port = 5672, QueueInteraction interaction = QueueInteraction.Bidirectional)
+        public MessageQueue(string hostname = null, int port = 5672, QueueInteraction interaction = QueueInteraction.Bidirectional, string standardExchange = null)
         {
             hostname = hostname == null ? Constants.Hostname : hostname;
             factory = new ConnectionFactory() { HostName = hostname, Port = port };
@@ -25,6 +26,8 @@ namespace Common
             channel = connection.CreateModel();
             consumer = new EventingBasicConsumer(channel);
             queueInteraction = interaction;
+
+            this.standardExchange = standardExchange == null ? null: standardExchange;
 
             ServiceExchangeBindings = new MultiRelationDictionary<string, Services>();
         }
@@ -40,6 +43,10 @@ namespace Common
 
         public virtual void CreateExchange(RabbitMQExchangeTypes exchangeType, string exchangeName)
         {
+            if (standardExchange == null)
+            {
+                standardExchange = exchangeName;
+            }
             channel.ExchangeDeclare(exchange: exchangeName,
                                     type: exchangeType.ToLower());
             ServiceExchangeBindings.Add(exchangeName);
@@ -73,22 +80,32 @@ namespace Common
                                      consumer: consumer);
             }
         }
-        public virtual void Send(NetworkFile<string[]> data)
+        public virtual void Send(NetworkFile<string[]> data, bool useStandard = false)
         {
-            Send<NetworkFile<string[]>>(data);
+            Send<NetworkFile<string[]>>(data, useStandard);
         }
 
-        public virtual void Send<T>(T data) where T : NetworkFile
+        public virtual void Send<T>(T data, bool useStandard = false) where T : NetworkFile
         {
             if (ShouldHaveSend)
             {
                 var messageBytes = Json.SerializeToBytes(data);
-                foreach (var exchangeName in ServiceExchangeBindings[data.Service])
+                if (useStandard)
                 {
                     channel.BasicPublish(
-                        exchange: exchangeName,
+                        exchange: standardExchange,
                         routingKey: data.Service.ToString(),
                         body: messageBytes);
+                }
+                else
+                {
+                    foreach (var exchangeName in ServiceExchangeBindings[data.Service])
+                    {
+                        channel.BasicPublish(
+                            exchange: exchangeName,
+                            routingKey: data.Service.ToString(),
+                            body: messageBytes);
+                    }
                 }
             }
             else
@@ -97,21 +114,33 @@ namespace Common
             }
 
         }
-        public virtual void Send(NetworkFile<string[]> data, IBasicProperties props)
+        public virtual void Send(NetworkFile<string[]> data, IBasicProperties props, bool useStandard = false)
         {
-            Send<NetworkFile<string[]>>(data, props);
+            Send<NetworkFile<string[]>>(data, props, useStandard);
         }
-        public virtual void Send<T>(T data, IBasicProperties props) where T : NetworkFile
+        public virtual void Send<T>(T data, IBasicProperties props, bool useStandard = false) where T : NetworkFile
         {
             if (ShouldHaveSend)
             {
-                var messageBytes = Json.SerializeToBytes(data);
-                foreach (var exchangeName in ServiceExchangeBindings[data.Service])
+                var messageBytes = Json.SerializeToBytes(data); 
+                if (useStandard)
                 {
                     channel.BasicPublish(
-                        exchange: exchangeName,
+                        exchange: standardExchange,
                         routingKey: data.Service.ToString(),
+                        basicProperties: props,
                         body: messageBytes);
+                }
+                else
+                {
+                    foreach (var exchangeName in ServiceExchangeBindings[data.Service])
+                    {
+                        channel.BasicPublish(
+                            exchange: exchangeName,
+                            routingKey: data.Service.ToString(),
+                            basicProperties: props,
+                            body: messageBytes);
+                    }
                 }
             }
             else
@@ -127,14 +156,7 @@ namespace Common
 
         public void AssignOnRecieve(Action<object, BasicDeliverEventArgs> methodToCall)
         {
-            if (ShouldHaveReceive)
-            {
-                consumer.Received += (model, ea) => methodToCall(model, ea);
-            }
-            else
-            {
-                throw new Exception("Queue is broadcaster and should not listen.");
-            }
+            consumer.Received += (model, ea) => methodToCall(model, ea);
         }
 
         public void AssignOnRecieve(Action<BasicDeliverEventArgs> methodToCall)
